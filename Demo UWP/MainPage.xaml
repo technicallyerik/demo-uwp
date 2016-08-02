@@ -7,7 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <SplitView x:Name="Menu" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DisplayMode="CompactOverlay" IsPaneOpen="False" OpenPaneLength="200" CompactPaneLength="50">
+        <SplitView.Pane>
+            <StackPanel>
+                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" />
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <TextBlock Text="Hello World!" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" />
+        </SplitView.Content>
+    </SplitView>
 </Page>
