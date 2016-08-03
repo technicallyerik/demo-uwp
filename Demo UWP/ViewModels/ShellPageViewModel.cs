@@ -10,35 +10,20 @@ using Windows.UI.Xaml.Controls;
 using Caliburn.Micro;
 using Demo_UWP.ViewModels.Navigation;
 
+using PropertyChanged;
+
 namespace Demo_UWP.ViewModels
 {
+    [ImplementPropertyChanged]
     public class ShellPageViewModel : Screen
     {
         private readonly WinRTContainer _container;
         private readonly IEventAggregator _eventAggregator;
         private INavigationService _navigationService;
-        private ObservableCollection<ShellPageNavigationItemViewModel> _mainNavigationItems;
-        private ShellPageNavigationItemViewModel _selectedMainNavigationItem;
 
-        public ObservableCollection<ShellPageNavigationItemViewModel> MainNavigationItems
-        {
-            get { return _mainNavigationItems; }
-            set
-            {
-                _mainNavigationItems = value;
-                NotifyOfPropertyChange();
-            }
-        }
+        public ObservableCollection<ShellPageNavigationItemViewModel> MainNavigationItems { get; set; }
 
-        public ShellPageNavigationItemViewModel SelectedMainNavigationItem
-        {
-            get { return _selectedMainNavigationItem; }
-            set
-            {
-                _selectedMainNavigationItem = value;
-                NotifyOfPropertyChange();
-            }
-        }
+        public ShellPageNavigationItemViewModel SelectedMainNavigationItem { get; set; }
 
         public ShellPageViewModel(WinRTContainer container, IEventAggregator eventAggregator)
         {
