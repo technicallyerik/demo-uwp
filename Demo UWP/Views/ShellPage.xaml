@@ -13,7 +13,7 @@
             <StackPanel>
                 <Button x:Name="HamburgerButton" FontFamily="{ThemeResource SymbolThemeFontFamily}" Content="&#xE700;"
                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" />
-                <ListBox x:Name="MainNavigationItems" cm:Message.Attach="[Event SelectionChanged] = [MenuItemSelected($this)]" />
+                <ListBox x:Name="MainNavigationItems" cm:Message.Attach="[Event SelectionChanged] = [MenuItemSelected]" />
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
