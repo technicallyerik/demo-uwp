@@ -2,9 +2,10 @@
     x:Class="Demo_UWP.Views.MasterPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Demo_UWP.Views"
+    xmlns:local="using:Demo_UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cm="using:Caliburn.Micro"
     mc:Ignorable="d">
 
     <Page.Transitions>
@@ -12,6 +13,33 @@
             <EntranceThemeTransition />
         </TransitionCollection>
     </Page.Transitions>
-    
-    <ContentControl x:Name="ActiveItem" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" /> <!-- Tablets and up -->
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Menu.CompactPaneLength" Value="50" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Button x:Name="HamburgerButton" FontFamily="{ThemeResource SymbolThemeFontFamily}" Content="&#xE700;"
+                        Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Canvas.ZIndex="1" />
+        
+        <SplitView x:Name="Menu" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DisplayMode="CompactOverlay" IsPaneOpen="False" OpenPaneLength="200" CompactPaneLength="0">
+            <SplitView.Pane>
+                <StackPanel>
+                    <ListBox x:Name="MainNavigationItems" cm:Message.Attach="[Event SelectionChanged] = [MenuItemSelected]" Margin="0 50 0 0" />
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame cm:Message.Attach="[Event Loaded] = [SetupNavigationService($source)]" DataContext="{x:Null}" />
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
 </Page>

@@ -1,6 +1,5 @@
 ﻿using System;
 
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Demo_UWP.Views
@@ -13,11 +12,6 @@ namespace Demo_UWP.Views
         public ShellPage()
         {
             this.InitializeComponent();
-        }
-
-        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
-        {
-            Menu.IsPaneOpen = !Menu.IsPaneOpen;
         }
     }
 }

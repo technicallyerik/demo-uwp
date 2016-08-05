@@ -1,59 +1,74 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+
+using Windows.UI.Xaml.Controls;
 
 using Caliburn.Micro;
 
-using Demo_UWP.Events;
+using Demo_UWP.ViewModels.Navigation;
+
+using PropertyChanged;
 
 namespace Demo_UWP.ViewModels
 {
-    class MasterPageViewModel : Conductor<IScreen>.Collection.OneActive, IHandle<LoginSuccessfulEvent>
+    [ImplementPropertyChanged]
+    public class MasterPageViewModel : Screen
     {
         private bool _loadedAlready;
-        private readonly InitialVisitorPageViewModel _initialVisitorPage;
-        private readonly ReturnVisitorPageViewModel _returnVisitorPage;
-        private readonly ShellPageViewModel _shellPage;
-        private readonly IEventAggregator _eventAggregator;
+        private readonly WinRTContainer _container;
+        private INavigationService _navigationService;
+        public ObservableCollection<ShellPageNavigationItemViewModel> MainNavigationItems { get; set; }
+        public ShellPageNavigationItemViewModel SelectedMainNavigationItem { get; set; }
 
-        public MasterPageViewModel(InitialVisitorPageViewModel initialVisitorPage, ReturnVisitorPageViewModel returnVisitorPage, ShellPageViewModel shellPage, IEventAggregator eventAggregator)
+        public MasterPageViewModel(WinRTContainer container)
         {
-            _initialVisitorPage = initialVisitorPage;
-            _returnVisitorPage = returnVisitorPage;
-            _shellPage = shellPage;
-            _eventAggregator = eventAggregator;
+            _container = container;
         }
 
         protected override void OnActivate()
         {
-            Debug.WriteLine($"Master Page Activated.  Loaded already? {_loadedAlready}");
-            _loadedAlready = true;
+            Debug.WriteLine($"Shell Page Activated.  Loaded already? {_loadedAlready}");
 
-            _eventAggregator.Subscribe(this);
-
-            var rand = new Random(); // Check if user is currently logged in
-
-            if (rand.Next(0, 2) == 0)
+            MainNavigationItems = new BindableCollection<ShellPageNavigationItemViewModel>
             {
-                ActivateItem(_initialVisitorPage);
-            }
-            else
-            {
-                ActivateItem(_returnVisitorPage);
-            }
-
-            base.OnActivate();
+                new ShellPageNavigationItemViewModel { Tag = "Home", Text = "Home", Glyph = Symbol.Home },
+                new ShellPageNavigationItemViewModel { Tag = "Favorites", Text = "Favorites", Glyph = Symbol.OutlineStar },
+                new ShellPageNavigationItemViewModel { Tag = "Settings", Text = "Settings", Glyph = Symbol.Setting }
+            };
         }
 
         protected override void OnDeactivate(bool close)
         {
-            _eventAggregator.Unsubscribe(this);
-
             Debug.WriteLine($"Master Page Deactivated.  Closed? {close}");
         }
 
-        public void Handle(LoginSuccessfulEvent message)
+        public void SetupNavigationService(Frame frame)
         {
-            ActivateItem(_shellPage);
+            if (_container.HasHandler(typeof(INavigationService), null))
+            {
+                _container.UnregisterHandler(typeof(INavigationService), null);
+            }
+
+            _navigationService = _container.RegisterNavigationService(frame);
+            SelectedMainNavigationItem = MainNavigationItems.First();
+        }
+
+        public void MenuItemSelected()
+        {
+            switch (SelectedMainNavigationItem.Tag)
+            {
+                case "Home":
+                    _navigationService.NavigateToViewModel<HomePageViewModel>();
+                    break;
+                case "Favorites":
+                    _navigationService.NavigateToViewModel<FavoritesPageViewModel>();
+                    break;
+                case "Settings":
+                    _navigationService.NavigateToViewModel<SettingsPageViewModel>();
+                    break;
+            }
         }
     }
 }

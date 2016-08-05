@@ -36,8 +36,8 @@ namespace Demo_UWP
             _container = new WinRTContainer();
             _container.RegisterWinRTServices();
 
-            _container.PerRequest<MasterPageViewModel>()
-                .PerRequest<ShellPageViewModel>()
+            _container.PerRequest<ShellPageViewModel>()
+                .PerRequest<MasterPageViewModel>()
                 .PerRequest<InitialVisitorPageViewModel>()
                 .PerRequest<ReturnVisitorPageViewModel>()
                 .PerRequest<HomePageViewModel>()
@@ -63,7 +63,7 @@ namespace Demo_UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            DisplayRootViewFor<MasterPageViewModel>();
+            DisplayRootViewFor<ShellPageViewModel>();
 
             if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
             {
