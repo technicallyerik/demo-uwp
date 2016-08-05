@@ -28,8 +28,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Button x:Name="HamburgerButton" FontFamily="{ThemeResource SymbolThemeFontFamily}" Content="&#xE700;"
-                        Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Canvas.ZIndex="1" />
+        <Button x:Name="HamburgerButton" Style="{StaticResource HamburgerButton}" Click="HamburgerButton_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Canvas.ZIndex="1" />
         
         <SplitView x:Name="Menu" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DisplayMode="CompactOverlay" IsPaneOpen="False" OpenPaneLength="200" CompactPaneLength="0">
             <SplitView.Pane>
