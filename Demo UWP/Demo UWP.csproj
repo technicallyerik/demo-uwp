@@ -95,9 +95,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Events\LoginSuccessfulEvent.cs" />
     <Compile Include="ViewModels\FavoritesPageViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\InitialVisitorPageViewModel.cs" />
+    <Compile Include="ViewModels\MasterPageViewModel.cs" />
     <Compile Include="ViewModels\Navigation\ShellPageNavigationItemViewModel.cs" />
+    <Compile Include="ViewModels\ReturnVisitorPageViewModel.cs" />
     <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="Views\FavoritesPage.xaml.cs">
       <DependentUpon>FavoritesPage.xaml</DependentUpon>
@@ -105,8 +109,17 @@
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InitialVisitorPage.xaml.cs">
+      <DependentUpon>InitialVisitorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MasterPage.xaml.cs">
+      <DependentUpon>MasterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Navigation\ShellPageNavigationItemView.xaml.cs">
       <DependentUpon>ShellPageNavigationItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReturnVisitorPage.xaml.cs">
+      <DependentUpon>ReturnVisitorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -147,7 +160,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InitialVisitorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MasterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Navigation\ShellPageNavigationItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReturnVisitorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
