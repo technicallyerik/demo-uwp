@@ -8,6 +8,12 @@
     xmlns:cm="using:Caliburn.Micro"
     mc:Ignorable="d">
 
+    <Page.Transitions>
+        <TransitionCollection>
+            <EntranceThemeTransition />
+        </TransitionCollection>
+    </Page.Transitions>
+
     <SplitView x:Name="Menu" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DisplayMode="CompactOverlay" IsPaneOpen="False" OpenPaneLength="200" CompactPaneLength="50">
         <SplitView.Pane>
             <StackPanel>
